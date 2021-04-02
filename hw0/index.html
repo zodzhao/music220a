@@ -1,20 +1,51 @@
 <html>
   <head>
     <title>
-      Homework 0: YOUR_TITLE_HERE
+      Homework 0: Hello Computer (Music)
     </title>
   </head>
   <body>
 
   Music 220a Homework 0, Spring 2021 <br>
-  YOUR_TITLE_HERE <br>
-  YOUR NAME HERE <br>
+  Hello Computer (Music) <br>
+  Jiazheng Zhao <br>
   <br>
 
-  A paragraph describing what you did, any starting points you can
-  credit, observations, things you learned along the way, etc.  You
-  will want to use  <a
-  href="http://chuck.stanford.edu/doc/examples/">links</a> <br>
+  <h2>
+  Part 1
+  </h2>
+  <p>
+  files: <a href="./part1.ck">chuck file</a>, <a href="./part1.wav">WAV audio file</a> <br>
 
+  I chose to work with the file "moe.ck". This file samples the absolute value of a sin function with step size of 0.1, and plays each sample for 100ms. It sounds like bouncing between low frequency to higher frequency sounds. <br>
+
+  I changed the multiplier on line 21 from 4000 to 8000, which is multiplied to the abs(sin()) function to decide the pitch. This widens the frequency range from 0-4000 to 0-8000, and makes it sounds more stretched.
+  </p>
+
+  <h2>
+  Part 2
+  </h2>
+  <p>
+  files: <a href="./part2.ck">chuck file</a>, <a href="./part2.wav">WAV audio file</a> <br>
+
+  With the limit of 50 lines, I attempt to include as many things we saw in class as possible. I used the basic sound generation using unit generators, randomness, arrays, if statements, for/while loops, functional programming, and multi-threads. Most importantly it has the "music 220" hidden in the theme :)<br><br>
+  First, I translatd the string "music 220" to morse code, and store it in a string array (The translation is done outside of chuck).<br><br>
+  Second, I created a function for each of the dot, dash, and space symbol in the string:
+
+  <ul>
+  	<li>For the dot ".", I play a SinOsc with reverb at frequency 440 (A4) for 200ms and pause for 40ms.</li>
+  	<li>For the dash "-", I play a SinOsc with reverb at frequency randomly chosen from [523.25, 587.33, 659.25] (C5, D5, E5) for 440ms and pause for 40ms (In total, twice the length of the dot symbol).</li>
+  	<li>For the space " ", pause for 480 ms by setting th gain to 0. (Same length as the dash symmbol).</li>
+  </ul>
+  Besides, I created a function to generate a bass sound by sequencially playing a TriOsc sound with reverb at the pitch [A2, C3, E3, C3, E3, A3]. Each for 2.88 seconds, which is the length of 12 dot sounds. <br><br>
+  Finally I created a while loop to do the following:
+  <ul>
+  	<li>Spork a new thread to play the bass part.</li>
+  	<li>use a for loop to iterate through the morse code string, and play each sound accordingly by calling the functions defined above.</li>
+  </ul>
+
+  The resulting "music" is not too bad. It sounds calm, distant and mysterious...
+  </p>
   </body>
 </html>
+
